@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="aiScore score-sec">
+            <h2 id="ai-score" class="score">1</h2>
+            <p class="score-title">AI Score</p>
+        </div>
+        <div class="userScore score-sec">
+            <h2 id="user-score" class="score">3</h2>
+            <p class="score-title">Your Score</p>
+        </div>
+    </div>
+    <!-- end of header -->
+    <div class="ai-container">
+        <h1 class="rps-countdown">ROCK!</h1>
+        <div class="AI-imageBox">
+            <img src="./src/assets/rock.png" alt="rock icon">
+        </div>
+        <p class="ai-p">AI CHOSE <span id="ai-choice">"Rock!"</span></p>
+    </div>
+    <!-- end of ai box -->
+    <div class="users-choices">
+        <h3>CHOOSE YOUR MOVE</h3>
+        <div id="rps-coices-con">
+            <div class="choice-con">
+                <img class="icon" src="./src/assets/rock.png" alt="rock icon">
+            </div>
+            <div class="choice-con">
+                <img class="icon" src="./src/assets/paper.png" alt="paper icon">
+            </div>
+            <div class="choice-con">
+                <img class="icon" src="./src/assets/scissors.png" alt="scissors icon">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
