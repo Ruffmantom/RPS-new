@@ -1,0 +1,21 @@
+/* 
+
+colors
+#FFE200 YELLOW
+#EDCC00 DARK YELLOW
+#ECEBEB LIGHT GRAY
+#4A646C DARK GRAY
+#009FA8 DK BLUE
+#A0D7D2 LIGHT BLUE
+
+*/
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica,sans-serif;
+}
+body{
+    height: 100vh;
+    background: linear-gradient(180deg, #009FA8, #A0D7D2);
+    background-size: contain;
+}
