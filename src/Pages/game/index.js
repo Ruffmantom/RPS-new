@@ -12,32 +12,58 @@ export default function Game() {
     var gameText = ["Rock!", "Paper!", "Scissors!", "Shoot!"];
     // need to do a timer but with the text in gameText
     // need a start game function also
-    const [aiScore, setaiScore] = useState(0);
-    const [userScore, setuserScore] = useState(0);
+    let [aiScore, setaiScore] = useState(0);
+    let [userScore, setuserScore] = useState(0);
     let roshambo;
 
-
-
-    // function startRPS() {
-    //     console.log("before roshambo gets ran thru")
-    //     roshambo = setInterval(function () {
-    //         for (var i = 0; i < gameText.length; i++) {
-    //             console.log(gameText[i])
-    //         }
-    //         console.log("after the loop")
-    //     }, 1000);
-    //     console.log("not working")
-    // }
-    
-    // got the functionality for getting the name of the icon chosen
+    // got the functionality for getting the name of the icon chosen "users Choice"
     function getData(e) {
-        const iconData = e.target.getAttribute("data-name");
-        console.log(iconData)
+        const usersPick = e.target.getAttribute("data-name");
+        console.log("You chose " + usersPick);
+        startRPS(usersPick)
+    }
+    // actual rps game
+    function rpsGame(usersChoice){
+        const rpsChoices = ["rock", "paper", "scissors"];
+        const aiChoices = rpsChoices[Math.floor(Math.random() * rpsChoices.length)];
+        console.log("Ai chose "+aiChoices);
+        // picking the winner
+        if (usersChoice === aiChoices){
+            console.log("tie!")
+        } else if (usersChoice === "rock" && aiChoices === "paper"){
+            console.log("Ai won!")
+            setaiScore++
+        } else if (usersChoice === "paper" && aiChoices === "scissors"){
+            console.log("Ai won!")
+            setaiScore++
+        } else if (usersChoice === "scissors" && aiChoices === "rock"){
+            console.log("Ai won!")
+            setaiScore++
+        } else{
+            console.log("You Won!")
+            setuserScore++
+        }
+    }
+    // click event to grab choice start count down and start game 
+
+    function startRPS(usersChoice) {
+        rpsGame(usersChoice)
+        // console.log("before roshambo gets ran thru")
+        // roshambo = setInterval(function () {
+        //     for (var i = 0; i < gameText.length; i++) {
+        //         console.log(gameText[i])
+        //     }
+        //     console.log("after the loop")
+        // }, 1000);
+        // console.log("not working")
     }
 
     return (
         <div>
-            <Header />
+            <Header 
+            aiScore={aiScore}
+            userScore={userScore}
+            />
             <div className="container">
                 <div className="ai-container">
                     <h1 className="rps-countdown">{roshambo}</h1>
