@@ -36,12 +36,12 @@ export default function Game() {
             (usersChoice === "paper" && aiChoices === "scissors") ||
             (usersChoice === "scissors" && aiChoices === "rock")) {
                 console.log("AI Won!")
-                setaiScore(+1)
+                setaiScore(aiScore + 1)
                 // aiScore++
             console.log("AI score " + aiScore)
         } else {
             console.log("You Won!")
-            setuserScore(+1)
+            setuserScore(userScore + 1)
             // userScore++
             console.log("your score " + userScore)
         }
