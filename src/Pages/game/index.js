@@ -24,7 +24,7 @@ export default function Game() {
         console.log("You chose " + usersPick);
         startRPS(usersPick)
     }
-    // actual rps game
+    // actual rps game function
     function rpsGame(usersChoice) {
         const aiChoices = rpsChoices[Math.floor(Math.random() * rpsChoices.length)];
         console.log("Ai chose " + aiChoices);
@@ -45,26 +45,36 @@ export default function Game() {
             console.log("your score " + userScore)
         }
     }
+    // main function to read through the array
+    var i = 0;
+    function readRPS(){
+        var h1El = document.getElementById('rps-countdown');
+        var gameTextInterval = setInterval(() => {
+            if (gameText[i] === undefined){
+                clearInterval(gameTextInterval);
+                var resetinterval = setInterval(() => {
+                    h1El.innerHTML = "Ready?"; 
+                    clearInterval(resetinterval);
+                }, 3000);
+            }else{
+                h1El.innerHTML = gameText[i];
+                i++
+                
+            }
+        }, 550);
+    }
     // click event to grab choice, start count down, and start game 
-
     function startRPS(usersChoice) {
         console.log("GAME STARTED!")
         // need to start the RPS text countdown
-
-        let test = [];
-        
-            setInterval(function () {
-                for (var i = 0; i < gameText.length; i++) {
-                    document.getElementById("rps-countdown").innerHTML = gameText[i];
-                }
-            }, 1000);
-            
-        
-        
-
+        readRPS()
         // passing users choice into the game to evaluate winner
         // I will need to make this function an await since it needs to have answer before the countdown ends
-        rpsGame(usersChoice)
+        var displayscoreInterval = setInterval(() => {
+            rpsGame(usersChoice)
+            clearInterval(displayscoreInterval);
+        }, 3150);
+        
     }
 
     return (
@@ -75,6 +85,7 @@ export default function Game() {
             />
             <div className="container">
                 <div className="ai-container">
+                    {/* might need to switch this to be state */}
                     <h1 id="rps-countdown">Ready?</h1>
                     <div className="AI-imageBox">
                         {/* this image will change when the ai gets a choice */}
@@ -101,3 +112,4 @@ export default function Game() {
         </div>
     )
 }
+
