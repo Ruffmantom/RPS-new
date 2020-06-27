@@ -6,16 +6,16 @@ import paper from "../../assets/paper.png";
 import scissors from "../../assets/scissors.png";
 // import the styles
 import "./style.css";
+// choices for game
+const rpsChoices = ["rock", "paper", "scissors"];
+// countdown text
+var gameText = ["Rock!", "Paper!", "Scissors!", "Shoot!"];
+
 
 export default function Game() {
-    // countdown text
-    var gameText = ["Rock!", "Paper!", "Scissors!", "Shoot!"];
     // need to do a timer but with the text in gameText
-    // need a start game function also
     var [aiScore, setaiScore] = useState(0);
     var [userScore, setuserScore] = useState(0);
-    // var aiScore = 0;
-    // var userScore = 0;
     let roshambo;
 
     // got the functionality for getting the name of the icon chosen "users Choice"
@@ -26,7 +26,6 @@ export default function Game() {
     }
     // actual rps game
     function rpsGame(usersChoice) {
-        const rpsChoices = ["rock", "paper", "scissors"];
         const aiChoices = rpsChoices[Math.floor(Math.random() * rpsChoices.length)];
         console.log("Ai chose " + aiChoices);
         // picking the winner
@@ -35,9 +34,9 @@ export default function Game() {
         } else if ((usersChoice === "rock" && aiChoices === "paper") ||
             (usersChoice === "paper" && aiChoices === "scissors") ||
             (usersChoice === "scissors" && aiChoices === "rock")) {
-                console.log("AI Won!")
-                setaiScore(aiScore + 1)
-                // aiScore++
+            console.log("AI Won!")
+            setaiScore(aiScore + 1)
+            // aiScore++
             console.log("AI score " + aiScore)
         } else {
             console.log("You Won!")
@@ -46,18 +45,26 @@ export default function Game() {
             console.log("your score " + userScore)
         }
     }
-    // click event to grab choice start count down and start game 
+    // click event to grab choice, start count down, and start game 
 
     function startRPS(usersChoice) {
+        console.log("GAME STARTED!")
+        // need to start the RPS text countdown
+
+        let test = [];
+        
+            setInterval(function () {
+                for (var i = 0; i < gameText.length; i++) {
+                    document.getElementById("rps-countdown").innerHTML = gameText[i];
+                }
+            }, 1000);
+            
+        
+        
+
+        // passing users choice into the game to evaluate winner
+        // I will need to make this function an await since it needs to have answer before the countdown ends
         rpsGame(usersChoice)
-        // console.log("before roshambo gets ran thru")
-        // roshambo = setInterval(function () {
-        //     for (var i = 0; i < gameText.length; i++) {
-        //         console.log(gameText[i])
-        //     }
-        //     console.log("after the loop")
-        // }, 1000);
-        // console.log("not working")
     }
 
     return (
@@ -68,7 +75,7 @@ export default function Game() {
             />
             <div className="container">
                 <div className="ai-container">
-                    <h1 className="rps-countdown">{roshambo}</h1>
+                    <h1 id="rps-countdown">Ready?</h1>
                     <div className="AI-imageBox">
                         {/* this image will change when the ai gets a choice */}
                         <img src={rocks} alt="rock icon" />

@@ -9,7 +9,7 @@
     padding: 10px;
     text-align: center;
 }
-.rps-countdown{
+#rps-countdown{
     color: #ECEBEB;
     font-size: 60px;
 }
