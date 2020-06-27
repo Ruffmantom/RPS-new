@@ -12,8 +12,10 @@ export default function Game() {
     var gameText = ["Rock!", "Paper!", "Scissors!", "Shoot!"];
     // need to do a timer but with the text in gameText
     // need a start game function also
-    let [aiScore, setaiScore] = useState(0);
-    let [userScore, setuserScore] = useState(0);
+    var [aiScore, setaiScore] = useState(0);
+    var [userScore, setuserScore] = useState(0);
+    // var aiScore = 0;
+    // var userScore = 0;
     let roshambo;
 
     // got the functionality for getting the name of the icon chosen "users Choice"
@@ -23,25 +25,25 @@ export default function Game() {
         startRPS(usersPick)
     }
     // actual rps game
-    function rpsGame(usersChoice){
+    function rpsGame(usersChoice) {
         const rpsChoices = ["rock", "paper", "scissors"];
         const aiChoices = rpsChoices[Math.floor(Math.random() * rpsChoices.length)];
-        console.log("Ai chose "+aiChoices);
+        console.log("Ai chose " + aiChoices);
         // picking the winner
-        if (usersChoice === aiChoices){
+        if (usersChoice === aiChoices) {
             console.log("tie!")
-        } else if (usersChoice === "rock" && aiChoices === "paper"){
-            console.log("Ai won!")
-            setaiScore++
-        } else if (usersChoice === "paper" && aiChoices === "scissors"){
-            console.log("Ai won!")
-            setaiScore++
-        } else if (usersChoice === "scissors" && aiChoices === "rock"){
-            console.log("Ai won!")
-            setaiScore++
-        } else{
+        } else if ((usersChoice === "rock" && aiChoices === "paper") ||
+            (usersChoice === "paper" && aiChoices === "scissors") ||
+            (usersChoice === "scissors" && aiChoices === "rock")) {
+                console.log("AI Won!")
+                setaiScore(+1)
+                // aiScore++
+            console.log("AI score " + aiScore)
+        } else {
             console.log("You Won!")
-            setuserScore++
+            setuserScore(+1)
+            // userScore++
+            console.log("your score " + userScore)
         }
     }
     // click event to grab choice start count down and start game 
@@ -60,9 +62,9 @@ export default function Game() {
 
     return (
         <div>
-            <Header 
-            aiScore={aiScore}
-            userScore={userScore}
+            <Header
+                aiScore={aiScore}
+                userScore={userScore}
             />
             <div className="container">
                 <div className="ai-container">
