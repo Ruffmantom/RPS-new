@@ -92,7 +92,7 @@ export default function Game() {
         var displayscoreInterval = setInterval(() => {
             rpsGame(usersChoice)
             clearInterval(displayscoreInterval);
-        }, 3150);
+        }, 2170);
 
     }
 
