@@ -16,6 +16,7 @@ export default function Game() {
     // need to do a timer but with the text in gameText
     var [aiScore, setaiScore] = useState(0);
     var [userScore, setuserScore] = useState(0);
+    var [aiChoice, setAiChoice] = useState();
     let roshambo;
 
     // got the functionality for getting the name of the icon chosen "users Choice"
@@ -28,6 +29,7 @@ export default function Game() {
     function rpsGame(usersChoice) {
         const aiChoices = rpsChoices[Math.floor(Math.random() * rpsChoices.length)];
         console.log("Ai chose " + aiChoices);
+        setAiChoice(aiChoice = '"'+aiChoices.toLocaleUpperCase()+'"');
         // picking the winner
         if (usersChoice === aiChoices) {
             console.log("tie!")
@@ -47,19 +49,19 @@ export default function Game() {
     }
     // main function to read through the array
     var i = 0;
-    function readRPS(){
+    function readRPS() {
         var h1El = document.getElementById('rps-countdown');
         var gameTextInterval = setInterval(() => {
-            if (gameText[i] === undefined){
+            if (gameText[i] === undefined) {
                 clearInterval(gameTextInterval);
                 var resetinterval = setInterval(() => {
                     clearInterval(resetinterval);
-                    h1El.innerHTML = "Ready?"; 
+                    h1El.innerHTML = "Ready?";
                 }, 3000);
-            }else{
+            } else {
                 h1El.innerHTML = gameText[i];
                 i++
-                
+
             }
         }, 550);
     }
@@ -74,7 +76,7 @@ export default function Game() {
             rpsGame(usersChoice)
             clearInterval(displayscoreInterval);
         }, 3150);
-        
+
     }
 
     return (
@@ -91,7 +93,7 @@ export default function Game() {
                         {/* this image will change when the ai gets a choice */}
                         <img src={rocks} alt="rock icon" />
                     </div>
-                    <p className="ai-p">AI CHOSE <span id="ai-choice">"Rock!"</span></p>
+                    <p className="ai-p">AI CHOSE <span id="ai-choice">{aiChoice}</span></p>
                 </div>
                 {/* end of ai box */}
                 <div className="users-choices">
