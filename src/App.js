@@ -10,6 +10,7 @@ function App() {
     <Router>
       <div>
         <Route exact path="/" component={Game}/>
+        <Route exact path="/RPS-new" component={Game}/>
       </div>
     </Router>
   );
