@@ -53,8 +53,8 @@ export default function Game() {
             if (gameText[i] === undefined){
                 clearInterval(gameTextInterval);
                 var resetinterval = setInterval(() => {
-                    h1El.innerHTML = "Ready?"; 
                     clearInterval(resetinterval);
+                    h1El.innerHTML = "Ready?"; 
                 }, 3000);
             }else{
                 h1El.innerHTML = gameText[i];
