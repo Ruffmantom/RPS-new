@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import Header from "../../components/Header"
+import React, { useState } from 'react';
+import Header from "../../components/Header";
 // adding the imports for the images
 import rocks from "../../assets/rock.png";
 import paper from "../../assets/paper.png";
@@ -19,12 +19,12 @@ export default function Game() {
     var [userScore, setuserScore] = useState(0);
     var [aiChoice, setAiChoice] = useState();
     var [aiImgChoice, setAiImgChoice] = useState(rocks);
-    let roshambo;
+    var [winnerText, setWinnerText] = useState("");
+    
 
     // got the functionality for getting the name of the icon chosen "users Choice"
     function getData(e) {
         const usersPick = e.target.getAttribute("data-name");
-        console.log("You chose " + usersPick);
         startRPS(usersPick)
     }
     // function for chhosing ai image choice
@@ -39,25 +39,24 @@ export default function Game() {
     }
     // actual rps game function
     function rpsGame(usersChoice) {
+        var winnerDiv = document.getElementById("winnerDiv");
         const aiChoices = rpsChoices[Math.floor(Math.random() * rpsChoices.length)];
-        console.log("Ai chose " + aiChoices);
         setAiChoice(aiChoice = '"' + aiChoices.toLocaleUpperCase() + '"');
         aiImage(aiChoices);
         // picking the winner
         if (usersChoice === aiChoices) {
-            console.log("tie!")
+            setWinnerText(winnerText = "You both chose " + aiChoices + " Its a tie!");
+            
         } else if ((usersChoice === "rock" && aiChoices === "paper") ||
             (usersChoice === "paper" && aiChoices === "scissors") ||
             (usersChoice === "scissors" && aiChoices === "rock")) {
-            console.log("AI Won!")
+            setWinnerText(winnerText = "Ai's " + aiChoices.toUpperCase() + " beats your " + usersChoice.toUpperCase() + ", Ai won this round");
+            
             setaiScore(aiScore + 1)
-            // aiScore++
-            console.log("AI score " + aiScore)
         } else {
-            console.log("You Won!")
+            setWinnerText(winnerText = "Your " + usersChoice.toUpperCase() + " beats the Ai's " + aiChoices.toUpperCase() + ", You won this round");
+            
             setuserScore(userScore + 1)
-            // userScore++
-            console.log("your score " + userScore)
         }
     }
     // main function to read through the array
@@ -65,15 +64,18 @@ export default function Game() {
     function readRPS() {
         var h1El = document.getElementById('rps-countdown');
         var aiImgBox = document.getElementById('AI-imageBox');
+        var winnerDiv = document.getElementById("winnerDiv");
         var gameTextInterval = setInterval(() => {
             if (gameText[i] === undefined) {
                 clearInterval(gameTextInterval);
+                // this interval resets game
                 var resetinterval = setInterval(() => {
                     clearInterval(resetinterval);
                     h1El.innerHTML = "Ready?";
                     setAiImgChoice(aiImgChoice = rocks);
                     setAiChoice(aiChoice = "")
                     aiImgBox.classList.remove("bounce");
+                   
                 }, 3500);
             } else {
                 h1El.innerHTML = gameText[i];
@@ -92,6 +94,7 @@ export default function Game() {
         var displayscoreInterval = setInterval(() => {
             rpsGame(usersChoice)
             clearInterval(displayscoreInterval);
+
         }, 2170);
 
     }
