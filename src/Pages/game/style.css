@@ -13,19 +13,41 @@
     color: #ECEBEB;
     font-size: 60px;
 }
-.AI-imageBox{
+#stage{
+    padding-top: 30px;
     display: flex;
+    justify-content: center;
+}
+#AI-imageBox{
+    position: relative;
+    top: 0;
+    display: flex;
+    animation-duration: 550ms;
+    animation-iteration-count: 4;
+    justify-content: center;
     padding: 35px 35px;
-    margin: 15px auto;
     height: 175px;
     width: 175px;
     background-color: #FFE200;
     border-radius: 15px;
     box-shadow: 7px 7px 10px #00000027;
 }
-.AI-imageBox > img{
+#AI-imageBox > img{
+    height: 100%;
     margin: auto;
 }
+/* bouncing affect css */
+.bounce {
+    animation-name: bounce;
+    animation-timing-function: ease;
+}
+@keyframes bounce {
+    100% { transform: translateY(0); }
+    50%  { transform: translateY(-5px); }
+    30%  { transform: translateY(30px); }
+    0%   { transform: translateY(0); } 
+}
+
 #ai-choice{
     font-size: 25px;
     font-weight: bold;

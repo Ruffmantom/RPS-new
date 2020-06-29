@@ -12,11 +12,13 @@ const rpsChoices = ["rock", "paper", "scissors"];
 var gameText = ["Rock!", "Paper!", "Scissors!", "Shoot!"];
 
 
+
 export default function Game() {
     // need to do a timer but with the text in gameText
     var [aiScore, setaiScore] = useState(0);
     var [userScore, setuserScore] = useState(0);
     var [aiChoice, setAiChoice] = useState();
+    var [aiImgChoice, setAiImgChoice] = useState(rocks);
     let roshambo;
 
     // got the functionality for getting the name of the icon chosen "users Choice"
@@ -25,11 +27,22 @@ export default function Game() {
         console.log("You chose " + usersPick);
         startRPS(usersPick)
     }
+    // function for chhosing ai image choice
+    function aiImage(aichoice) {
+        if (aichoice === "rock") {
+            setAiImgChoice(aiImgChoice = rocks)
+        } else if (aichoice === "paper") {
+            setAiImgChoice(aiImgChoice = paper)
+        } else {
+            setAiImgChoice(aiImgChoice = scissors)
+        }
+    }
     // actual rps game function
     function rpsGame(usersChoice) {
         const aiChoices = rpsChoices[Math.floor(Math.random() * rpsChoices.length)];
         console.log("Ai chose " + aiChoices);
-        setAiChoice(aiChoice = '"'+aiChoices.toLocaleUpperCase()+'"');
+        setAiChoice(aiChoice = '"' + aiChoices.toLocaleUpperCase() + '"');
+        aiImage(aiChoices);
         // picking the winner
         if (usersChoice === aiChoices) {
             console.log("tie!")
@@ -51,17 +64,21 @@ export default function Game() {
     var i = 0;
     function readRPS() {
         var h1El = document.getElementById('rps-countdown');
+        var aiImgBox = document.getElementById('AI-imageBox');
         var gameTextInterval = setInterval(() => {
             if (gameText[i] === undefined) {
                 clearInterval(gameTextInterval);
                 var resetinterval = setInterval(() => {
                     clearInterval(resetinterval);
                     h1El.innerHTML = "Ready?";
-                }, 3000);
+                    setAiImgChoice(aiImgChoice = rocks);
+                    setAiChoice(aiChoice = "")
+                    aiImgBox.classList.remove("bounce");
+                }, 3500);
             } else {
                 h1El.innerHTML = gameText[i];
                 i++
-
+                aiImgBox.classList.add("bounce");
             }
         }, 550);
     }
@@ -89,10 +106,13 @@ export default function Game() {
                 <div className="ai-container">
                     {/* might need to switch this to be state */}
                     <h1 id="rps-countdown">Ready?</h1>
-                    <div className="AI-imageBox">
-                        {/* this image will change when the ai gets a choice */}
-                        <img src={rocks} alt="rock icon" />
+                    <div id="stage">
+                        <div id="AI-imageBox">
+                            {/* this image will change when the ai gets a choice */}
+                            <img src={aiImgChoice} alt="rps icon" />
+                        </div>
                     </div>
+
                     <p className="ai-p">AI CHOSE <span id="ai-choice">{aiChoice}</span></p>
                 </div>
                 {/* end of ai box */}
