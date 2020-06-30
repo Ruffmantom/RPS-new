@@ -71,8 +71,18 @@
     box-shadow: 7px 7px 10px #00000027;
     height: 75px;
     width: 75px;
+    animation-duration: 500ms;
 }
+.zoom{
+    /* animation-name: zoom;
+    animation-timing-function: ease-in; */
+    width: 85px;
+    height: 85px;
+    transition: 300ms ease-in-out;
+}
+
+
 .icon{
-    height: 45px;
+    height: 75%;
     margin: auto;
 }

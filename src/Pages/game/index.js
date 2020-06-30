@@ -28,6 +28,13 @@ export default function Game() {
         const usersPick = e.target.getAttribute("data-name");
         startRPS(usersPick)
         setChoiceText(choiceText = usersPick.toUpperCase());
+        let div = e.currentTarget.parentNode;
+        console.log(div)
+        div.classList.add("zoom");
+        let zoomInterval = setInterval(() => {
+            div.classList.remove("zoom");
+            clearInterval(zoomInterval)
+        }, 6250);
     }
     // function for chhosing ai image choice
     function aiImage(aichoice) {
