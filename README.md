@@ -18,7 +18,9 @@ Images
 ![image of Winning](src/assets/rps-won.PNG)
 ---
 ## Technologies
+
 This App was Built with React, JSX, CSS3, Javascript, gh-pages "To host react project on Github", Adobe Illustrator, Adobe XD
+
 ---  
 ### Concept Art
 ![Image of first Concept](src/assets/RPS-mock.png)
