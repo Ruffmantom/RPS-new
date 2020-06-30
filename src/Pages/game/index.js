@@ -25,6 +25,10 @@ export default function Game() {
 
     // got the functionality for getting the name of the icon chosen "users Choice"
     function getData(e) {
+        // invisible div pops up
+        var invisible = document.getElementById("cant-touch-this");
+        invisible.style.display = "block";
+        // user pic data
         const usersPick = e.target.getAttribute("data-name");
         startRPS(usersPick)
         setChoiceText(choiceText = usersPick.toUpperCase());
@@ -33,6 +37,7 @@ export default function Game() {
         div.classList.add("zoom");
         let zoomInterval = setInterval(() => {
             div.classList.remove("zoom");
+            invisible.style.display = "none";
             clearInterval(zoomInterval)
         }, 6250);
     }
@@ -104,6 +109,9 @@ export default function Game() {
 
     return (
         <div>
+            <div id="cant-touch-this">
+
+            </div>
             <Header
                 aiScore={aiScore}
                 userScore={userScore}

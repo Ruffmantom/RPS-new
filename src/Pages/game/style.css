@@ -86,3 +86,11 @@
     height: 75%;
     margin: auto;
 }
+/* styles for invisible div when user cant click on next item */
+#cant-touch-this{
+    display: none;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
