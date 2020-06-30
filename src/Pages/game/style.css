@@ -56,7 +56,8 @@
  text-align: center;
 }
 .users-choices > h3{
-    font-size: 1.7rem;
+    font-size: 1.3rem;
+    padding: 0 10px;
 }
 #rps-coices-con{
     display: flex;

@@ -19,13 +19,15 @@ export default function Game() {
     var [userScore, setuserScore] = useState(0);
     var [aiChoice, setAiChoice] = useState();
     var [aiImgChoice, setAiImgChoice] = useState(rocks);
-    var [winnerText, setWinnerText] = useState("");
-    
+    var [countDown, setCountDown] = useState("Ready?");
+    var [choiceText, setChoiceText] = useState("CHOOSE YOUR MOVE");
+
 
     // got the functionality for getting the name of the icon chosen "users Choice"
     function getData(e) {
         const usersPick = e.target.getAttribute("data-name");
         startRPS(usersPick)
+        setChoiceText(choiceText = usersPick.toUpperCase());
     }
     // function for chhosing ai image choice
     function aiImage(aichoice) {
@@ -39,46 +41,40 @@ export default function Game() {
     }
     // actual rps game function
     function rpsGame(usersChoice) {
-        var winnerDiv = document.getElementById("winnerDiv");
         const aiChoices = rpsChoices[Math.floor(Math.random() * rpsChoices.length)];
         setAiChoice(aiChoice = '"' + aiChoices.toLocaleUpperCase() + '"');
         aiImage(aiChoices);
         // picking the winner
         if (usersChoice === aiChoices) {
-            setWinnerText(winnerText = "You both chose " + aiChoices + " Its a tie!");
-            
+            setChoiceText(choiceText = "TIE!");
         } else if ((usersChoice === "rock" && aiChoices === "paper") ||
             (usersChoice === "paper" && aiChoices === "scissors") ||
             (usersChoice === "scissors" && aiChoices === "rock")) {
-            setWinnerText(winnerText = "Ai's " + aiChoices.toUpperCase() + " beats your " + usersChoice.toUpperCase() + ", Ai won this round");
-            
             setaiScore(aiScore + 1)
+            setChoiceText(choiceText = "AI Won! " + aiChoices.toUpperCase() + " beats your " + usersChoice.toUpperCase());
         } else {
-            setWinnerText(winnerText = "Your " + usersChoice.toUpperCase() + " beats the Ai's " + aiChoices.toUpperCase() + ", You won this round");
-            
             setuserScore(userScore + 1)
+            setChoiceText(choiceText = "YOU Won! " + usersChoice.toUpperCase() + " beats AI's " + aiChoices.toUpperCase());
         }
     }
     // main function to read through the array
     var i = 0;
     function readRPS() {
-        var h1El = document.getElementById('rps-countdown');
         var aiImgBox = document.getElementById('AI-imageBox');
-        var winnerDiv = document.getElementById("winnerDiv");
         var gameTextInterval = setInterval(() => {
             if (gameText[i] === undefined) {
                 clearInterval(gameTextInterval);
                 // this interval resets game
                 var resetinterval = setInterval(() => {
                     clearInterval(resetinterval);
-                    h1El.innerHTML = "Ready?";
+                    setCountDown(countDown = "Ready?");
                     setAiImgChoice(aiImgChoice = rocks);
                     setAiChoice(aiChoice = "")
                     aiImgBox.classList.remove("bounce");
-                   
+                    setChoiceText(choiceText = "CHOOSE YOUR MOVE");
                 }, 3500);
             } else {
-                h1El.innerHTML = gameText[i];
+                setCountDown(countDown = gameText[i]);
                 i++
                 aiImgBox.classList.add("bounce");
             }
@@ -108,7 +104,7 @@ export default function Game() {
             <div className="container">
                 <div className="ai-container">
                     {/* might need to switch this to be state */}
-                    <h1 id="rps-countdown">Ready?</h1>
+                    <h1 id="rps-countdown">{countDown}</h1>
                     <div id="stage">
                         <div id="AI-imageBox">
                             {/* this image will change when the ai gets a choice */}
@@ -116,11 +112,11 @@ export default function Game() {
                         </div>
                     </div>
 
-                    <p className="ai-p">AI CHOSE <span id="ai-choice">{aiChoice}</span></p>
+                    {/* <p className="ai-p">AI CHOSE <span id="ai-choice">{aiChoice}</span></p> */}
                 </div>
                 {/* end of ai box */}
                 <div className="users-choices">
-                    <h3>CHOOSE YOUR MOVE</h3>
+                    <h3 id="user-choice-text">{choiceText}</h3>
                     <div id="rps-coices-con">
                         <div className="choice-con">
                             <img className="icon" src={rocks} alt="rock icon" onClick={getData} data-name="rock" />
